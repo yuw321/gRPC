@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+package reddit;
+
+// User definition
+message User {
+  string user_id = 1;
+}
+
+// Post definition
+message Post {
+  string title = 1;
+  string text = 2;
+  oneof media {
+    string video_url = 3;
+    string image_url = 4;
+  }
+  string author_id = 5; // Optional
+  int32 score = 6;
+  PostStatus status = 7;
+  string publication_date = 8;
+  string subreddit = 9; // Optional for extra credit
+  int32 post_id = 10;
+  repeated string tags = 11;
+}
+
+// Comment definition
+message Comment {
+  string author_id = 1;
+  string text = 2;
+  int32 score = 3;
+  CommentStatus status = 4;
+  string publication_date = 5;
+  string parent_id = 6; // ID of the parent post or comment
+  int32 comment_id = 7;
+}
+
+// Subreddit definition (Extra Credit)
+message Subreddit {
+  string name = 1;
+  SubredditVisibility visibility = 2;
+  repeated string tags = 3;
+}
+
+// Enums
+enum PostStatus {
+  POST_NORMAL = 0;
+  POST_LOCKED = 1;
+  POST_HIDDEN = 2;
+}
+
+enum CommentStatus {
+  COMMENT_NORMAL = 0;
+  COMMENT_HIDDEN = 1;
+}
+
+enum SubredditVisibility {
+  SUBREDDIT_PUBLIC = 0;
+  SUBREDDIT_PRIVATE = 1;
+  SUBREDDIT_HIDDEN = 2;
+}
+
+
+service RedditService {
+  // Create a Post
+  rpc CreatePost(CreatePostRequest) returns (PostResponse);
+
+  // Upvote or Downvote a Post
+  rpc VotePost(VotePostRequest) returns (VoteResponse);
+
+  // Retrieve Post content
+  rpc GetPost(GetPostRequest) returns (PostResponse);
+
+  // Create a Comment
+  rpc CreateComment(CreateCommentRequest) returns (CommentResponse);
+
+  // Upvote or Downvote a Comment
+  rpc VoteComment(VoteCommentRequest) returns (VoteResponse);
+
+  // Retrieve a list of N most upvoted comments under a post
+  rpc GetTopComments(GetTopCommentsRequest) returns (TopCommentsResponse);
+
+  // Expand a comment branch
+  rpc ExpandComment(ExpandCommentRequest) returns (ExpandedCommentsResponse);
+
+  // Monitor updates (Extra Credit)
+  rpc MonitorUpdates(MonitorUpdatesRequest) returns (stream UpdateResponse);
+}
+
+// Request and response messages for the service methods
+message CreatePostRequest {
+  string title = 1;
+  string text = 2;
+  oneof media {
+    string video_url = 3;
+    string image_url = 4;
+  }
+  string author_id = 5;
+  string subreddit = 6;
+}
+
+message PostResponse {
+  Post post = 1;
+}
+
+message VotePostRequest {
+  string post_id = 1;
+  int32 vote = 2; // 1 for upvote, -1 for downvote
+}
+
+message VoteResponse {
+  int32 new_score = 1;
+}
+
+message GetPostRequest {
+  string post_id = 1;
+}
+
+message CreateCommentRequest {
+  string author_id = 1;
+  string text = 2;
+  string parent_id = 3; // ID of the parent post or comment
+}
+
+message CommentResponse {
+  Comment comment = 1;
+}
+
+message VoteCommentRequest {
+  string comment_id = 1;
+  int32 vote = 2; // 1 for upvote, -1 for downvote
+}
+
+message GetTopCommentsRequest {
+  string post_id = 1;
+  int32 number_of_comments = 2;
+}
+
+message TopCommentsResponse {
+  repeated Comment comments = 1;
+}
+
+message ExpandCommentRequest {
+  string comment_id = 1;
+  int32 depth = 2;
+}
+
+message ExpandedCommentsResponse {
+  repeated CommentWithReplies parent_comments = 1;
+}
+
+message CommentWithReplies {
+  Comment comment = 1;
+  repeated Comment replies = 2;
+}
+
+// Extra Credit
+message MonitorUpdatesRequest {
+  string post_id = 1;
+  repeated string comment_ids = 2;
+}
+
+message UpdateResponse {
+  string id = 1;
+  int32 new_score = 2;
+}
+
