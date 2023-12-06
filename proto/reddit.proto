@@ -20,7 +20,7 @@ message Post {
   PostStatus status = 7;
   string publication_date = 8;
   string subreddit = 9; // Optional for extra credit
-  int32 post_id = 10;
+  string post_id = 10;
   repeated string tags = 11;
 }
 
@@ -32,7 +32,7 @@ message Comment {
   CommentStatus status = 4;
   string publication_date = 5;
   string parent_id = 6; // ID of the parent post or comment
-  int32 comment_id = 7;
+  string comment_id = 7;
 }
 
 // Subreddit definition (Extra Credit)

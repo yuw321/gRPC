@@ -59,9 +59,9 @@ class Post(_message.Message):
     status: PostStatus
     publication_date: str
     subreddit: str
-    post_id: int
+    post_id: str
     tags: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, title: _Optional[str] = ..., text: _Optional[str] = ..., video_url: _Optional[str] = ..., image_url: _Optional[str] = ..., author_id: _Optional[str] = ..., score: _Optional[int] = ..., status: _Optional[_Union[PostStatus, str]] = ..., publication_date: _Optional[str] = ..., subreddit: _Optional[str] = ..., post_id: _Optional[int] = ..., tags: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, title: _Optional[str] = ..., text: _Optional[str] = ..., video_url: _Optional[str] = ..., image_url: _Optional[str] = ..., author_id: _Optional[str] = ..., score: _Optional[int] = ..., status: _Optional[_Union[PostStatus, str]] = ..., publication_date: _Optional[str] = ..., subreddit: _Optional[str] = ..., post_id: _Optional[str] = ..., tags: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class Comment(_message.Message):
     __slots__ = ["author_id", "text", "score", "status", "publication_date", "parent_id", "comment_id"]
@@ -78,8 +78,8 @@ class Comment(_message.Message):
     status: CommentStatus
     publication_date: str
     parent_id: str
-    comment_id: int
-    def __init__(self, author_id: _Optional[str] = ..., text: _Optional[str] = ..., score: _Optional[int] = ..., status: _Optional[_Union[CommentStatus, str]] = ..., publication_date: _Optional[str] = ..., parent_id: _Optional[str] = ..., comment_id: _Optional[int] = ...) -> None: ...
+    comment_id: str
+    def __init__(self, author_id: _Optional[str] = ..., text: _Optional[str] = ..., score: _Optional[int] = ..., status: _Optional[_Union[CommentStatus, str]] = ..., publication_date: _Optional[str] = ..., parent_id: _Optional[str] = ..., comment_id: _Optional[str] = ...) -> None: ...
 
 class Subreddit(_message.Message):
     __slots__ = ["name", "visibility", "tags"]
