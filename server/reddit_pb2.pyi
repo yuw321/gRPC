@@ -38,7 +38,7 @@ class User(_message.Message):
     def __init__(self, user_id: _Optional[str] = ...) -> None: ...
 
 class Post(_message.Message):
-    __slots__ = ["title", "text", "video_url", "image_url", "author_id", "score", "status", "publication_date", "subreddit", "post_id", "tags"]
+    __slots__ = ["title", "text", "video_url", "image_url", "author_id", "score", "status", "publication_date", "subreddit", "post_id", "tags", "reply_count"]
     TITLE_FIELD_NUMBER: _ClassVar[int]
     TEXT_FIELD_NUMBER: _ClassVar[int]
     VIDEO_URL_FIELD_NUMBER: _ClassVar[int]
@@ -50,6 +50,7 @@ class Post(_message.Message):
     SUBREDDIT_FIELD_NUMBER: _ClassVar[int]
     POST_ID_FIELD_NUMBER: _ClassVar[int]
     TAGS_FIELD_NUMBER: _ClassVar[int]
+    REPLY_COUNT_FIELD_NUMBER: _ClassVar[int]
     title: str
     text: str
     video_url: str
@@ -61,10 +62,11 @@ class Post(_message.Message):
     subreddit: str
     post_id: str
     tags: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, title: _Optional[str] = ..., text: _Optional[str] = ..., video_url: _Optional[str] = ..., image_url: _Optional[str] = ..., author_id: _Optional[str] = ..., score: _Optional[int] = ..., status: _Optional[_Union[PostStatus, str]] = ..., publication_date: _Optional[str] = ..., subreddit: _Optional[str] = ..., post_id: _Optional[str] = ..., tags: _Optional[_Iterable[str]] = ...) -> None: ...
+    reply_count: int
+    def __init__(self, title: _Optional[str] = ..., text: _Optional[str] = ..., video_url: _Optional[str] = ..., image_url: _Optional[str] = ..., author_id: _Optional[str] = ..., score: _Optional[int] = ..., status: _Optional[_Union[PostStatus, str]] = ..., publication_date: _Optional[str] = ..., subreddit: _Optional[str] = ..., post_id: _Optional[str] = ..., tags: _Optional[_Iterable[str]] = ..., reply_count: _Optional[int] = ...) -> None: ...
 
 class Comment(_message.Message):
-    __slots__ = ["author_id", "text", "score", "status", "publication_date", "parent_id", "comment_id"]
+    __slots__ = ["author_id", "text", "score", "status", "publication_date", "parent_id", "comment_id", "reply_count"]
     AUTHOR_ID_FIELD_NUMBER: _ClassVar[int]
     TEXT_FIELD_NUMBER: _ClassVar[int]
     SCORE_FIELD_NUMBER: _ClassVar[int]
@@ -72,6 +74,7 @@ class Comment(_message.Message):
     PUBLICATION_DATE_FIELD_NUMBER: _ClassVar[int]
     PARENT_ID_FIELD_NUMBER: _ClassVar[int]
     COMMENT_ID_FIELD_NUMBER: _ClassVar[int]
+    REPLY_COUNT_FIELD_NUMBER: _ClassVar[int]
     author_id: str
     text: str
     score: int
@@ -79,7 +82,8 @@ class Comment(_message.Message):
     publication_date: str
     parent_id: str
     comment_id: str
-    def __init__(self, author_id: _Optional[str] = ..., text: _Optional[str] = ..., score: _Optional[int] = ..., status: _Optional[_Union[CommentStatus, str]] = ..., publication_date: _Optional[str] = ..., parent_id: _Optional[str] = ..., comment_id: _Optional[str] = ...) -> None: ...
+    reply_count: int
+    def __init__(self, author_id: _Optional[str] = ..., text: _Optional[str] = ..., score: _Optional[int] = ..., status: _Optional[_Union[CommentStatus, str]] = ..., publication_date: _Optional[str] = ..., parent_id: _Optional[str] = ..., comment_id: _Optional[str] = ..., reply_count: _Optional[int] = ...) -> None: ...
 
 class Subreddit(_message.Message):
     __slots__ = ["name", "visibility", "tags"]

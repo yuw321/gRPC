@@ -32,6 +32,7 @@ class RedditServiceServicer(reddit_pb2_grpc.RedditServiceServicer):
             subreddit="",
             post_id=f"post{len(self.posts)}",
             tags=[],
+            reply_count=0,
         )
         self.comments["comment0"] = reddit_pb2.Comment(
             author_id="user0",
@@ -41,7 +42,9 @@ class RedditServiceServicer(reddit_pb2_grpc.RedditServiceServicer):
             publication_date=datetime.today().strftime("%Y-%m-%d"),
             parent_id="post0",
             comment_id=f"comment{len(self.comments)}",
+            reply_count=0,
         )
+        self.parent_comments["post0"].append(self.comments["comment0"])
 
     def CreatePost(self, request, context):
         # Retrieve input
@@ -85,6 +88,7 @@ class RedditServiceServicer(reddit_pb2_grpc.RedditServiceServicer):
             subreddit=request.subreddit,
             post_id=f"post{len(self.posts)}",
             tags=subreddit_tags,
+            reply_count=0,
         )
         # Save new post
         self.posts[new_post.post_id] = new_post
@@ -152,7 +156,11 @@ class RedditServiceServicer(reddit_pb2_grpc.RedditServiceServicer):
             publication_date=datetime.today().strftime("%Y-%m-%d"),
             parent_id=parent_id,
             comment_id=f"comment{len(self.comments)}",
+            reply_count=0,
         )
+
+        # Increment reply count for parent
+        parent_content.reply_count += 1
 
         # Save new comment
         self.comments[new_comment.comment_id] = new_comment
@@ -175,8 +183,28 @@ class RedditServiceServicer(reddit_pb2_grpc.RedditServiceServicer):
         return reddit_pb2.VoteResponse(new_score=comment.score)
 
     def GetTopComments(self, request, context):
-        # TODO: Implement logic to retrieve top N comments
-        pass
+        post_id = request.post_id
+        number_of_comments = request.number_of_comments
+        post = self.posts.get(post_id, None)
+
+        # Validate Input
+        if number_of_comments < 1:
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+            context.set_details("Number of comments can not be less than 1")
+            return reddit_pb2.TopCommentsResponse(comments=None)
+        elif not post:
+            context.set_code(grpc.StatusCode.NOT_FOUND)
+            context.set_details("Post requested not found")
+            return reddit_pb2.TopCommentsResponse(comments=None)
+
+        # Find the comments under requested post
+        sorted_post_comments = sorted(
+            self.parent_comments[post_id], key=lambda x: x.score, reverse=True
+        )
+
+        return reddit_pb2.TopCommentsResponse(
+            comments=sorted_post_comments[:number_of_comments]
+        )
 
     def ExpandComment(self, request, context):
         # TODO: Implement logic to expand a comment branch
