@@ -22,6 +22,7 @@ message Post {
   string subreddit = 9; // Optional for extra credit
   string post_id = 10;
   repeated string tags = 11;
+  int32 reply_count = 12;
 }
 
 // Comment definition
@@ -33,6 +34,7 @@ message Comment {
   string publication_date = 5;
   string parent_id = 6; // ID of the parent post or comment
   string comment_id = 7;
+  int32 reply_count = 8;
 }
 
 // Subreddit definition (Extra Credit)
