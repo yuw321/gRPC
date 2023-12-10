@@ -1,0 +1,14 @@
+gRPC/
+├── client/
+|   ├── __init__.py
+│   ├── reddit_client.py
+├── server/
+|   ├── __init__.py
+│   ├── reddit_server.py
+│   ├── reddit_pb2_grpc.py
+│   ├── reddit_pb2.py
+│   ├── reddit_pb2.pyi
+│   └── ...
+└── tests/
+    ├── __init__.py
+    └── test_reddit_client.py

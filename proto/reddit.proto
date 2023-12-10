@@ -144,7 +144,7 @@ message TopCommentsResponse {
 
 message ExpandCommentRequest {
   string comment_id = 1;
-  int32 depth = 2;
+  int32 number_of_comments = 2;
 }
 
 message ExpandedCommentsResponse {

@@ -176,12 +176,12 @@ class TopCommentsResponse(_message.Message):
     def __init__(self, comments: _Optional[_Iterable[_Union[Comment, _Mapping]]] = ...) -> None: ...
 
 class ExpandCommentRequest(_message.Message):
-    __slots__ = ["comment_id", "depth"]
+    __slots__ = ["comment_id", "number_of_comments"]
     COMMENT_ID_FIELD_NUMBER: _ClassVar[int]
-    DEPTH_FIELD_NUMBER: _ClassVar[int]
+    NUMBER_OF_COMMENTS_FIELD_NUMBER: _ClassVar[int]
     comment_id: str
-    depth: int
-    def __init__(self, comment_id: _Optional[str] = ..., depth: _Optional[int] = ...) -> None: ...
+    number_of_comments: int
+    def __init__(self, comment_id: _Optional[str] = ..., number_of_comments: _Optional[int] = ...) -> None: ...
 
 class ExpandedCommentsResponse(_message.Message):
     __slots__ = ["parent_comments"]

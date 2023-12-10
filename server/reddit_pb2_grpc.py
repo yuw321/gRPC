@@ -15,291 +15,380 @@ class RedditServiceStub(object):
             channel: A grpc.Channel.
         """
         self.CreatePost = channel.unary_unary(
-                '/reddit.RedditService/CreatePost',
-                request_serializer=reddit__pb2.CreatePostRequest.SerializeToString,
-                response_deserializer=reddit__pb2.PostResponse.FromString,
-                )
+            "/reddit.RedditService/CreatePost",
+            request_serializer=reddit__pb2.CreatePostRequest.SerializeToString,
+            response_deserializer=reddit__pb2.PostResponse.FromString,
+        )
         self.VotePost = channel.unary_unary(
-                '/reddit.RedditService/VotePost',
-                request_serializer=reddit__pb2.VotePostRequest.SerializeToString,
-                response_deserializer=reddit__pb2.VoteResponse.FromString,
-                )
+            "/reddit.RedditService/VotePost",
+            request_serializer=reddit__pb2.VotePostRequest.SerializeToString,
+            response_deserializer=reddit__pb2.VoteResponse.FromString,
+        )
         self.GetPost = channel.unary_unary(
-                '/reddit.RedditService/GetPost',
-                request_serializer=reddit__pb2.GetPostRequest.SerializeToString,
-                response_deserializer=reddit__pb2.PostResponse.FromString,
-                )
+            "/reddit.RedditService/GetPost",
+            request_serializer=reddit__pb2.GetPostRequest.SerializeToString,
+            response_deserializer=reddit__pb2.PostResponse.FromString,
+        )
         self.CreateComment = channel.unary_unary(
-                '/reddit.RedditService/CreateComment',
-                request_serializer=reddit__pb2.CreateCommentRequest.SerializeToString,
-                response_deserializer=reddit__pb2.CommentResponse.FromString,
-                )
+            "/reddit.RedditService/CreateComment",
+            request_serializer=reddit__pb2.CreateCommentRequest.SerializeToString,
+            response_deserializer=reddit__pb2.CommentResponse.FromString,
+        )
         self.VoteComment = channel.unary_unary(
-                '/reddit.RedditService/VoteComment',
-                request_serializer=reddit__pb2.VoteCommentRequest.SerializeToString,
-                response_deserializer=reddit__pb2.VoteResponse.FromString,
-                )
+            "/reddit.RedditService/VoteComment",
+            request_serializer=reddit__pb2.VoteCommentRequest.SerializeToString,
+            response_deserializer=reddit__pb2.VoteResponse.FromString,
+        )
         self.GetTopComments = channel.unary_unary(
-                '/reddit.RedditService/GetTopComments',
-                request_serializer=reddit__pb2.GetTopCommentsRequest.SerializeToString,
-                response_deserializer=reddit__pb2.TopCommentsResponse.FromString,
-                )
+            "/reddit.RedditService/GetTopComments",
+            request_serializer=reddit__pb2.GetTopCommentsRequest.SerializeToString,
+            response_deserializer=reddit__pb2.TopCommentsResponse.FromString,
+        )
         self.ExpandComment = channel.unary_unary(
-                '/reddit.RedditService/ExpandComment',
-                request_serializer=reddit__pb2.ExpandCommentRequest.SerializeToString,
-                response_deserializer=reddit__pb2.ExpandedCommentsResponse.FromString,
-                )
+            "/reddit.RedditService/ExpandComment",
+            request_serializer=reddit__pb2.ExpandCommentRequest.SerializeToString,
+            response_deserializer=reddit__pb2.ExpandedCommentsResponse.FromString,
+        )
         self.MonitorUpdates = channel.unary_stream(
-                '/reddit.RedditService/MonitorUpdates',
-                request_serializer=reddit__pb2.MonitorUpdatesRequest.SerializeToString,
-                response_deserializer=reddit__pb2.UpdateResponse.FromString,
-                )
+            "/reddit.RedditService/MonitorUpdates",
+            request_serializer=reddit__pb2.MonitorUpdatesRequest.SerializeToString,
+            response_deserializer=reddit__pb2.UpdateResponse.FromString,
+        )
 
 
 class RedditServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def CreatePost(self, request, context):
-        """Create a Post
-        """
+        """Create a Post"""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def VotePost(self, request, context):
-        """Upvote or Downvote a Post
-        """
+        """Upvote or Downvote a Post"""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def GetPost(self, request, context):
-        """Retrieve Post content
-        """
+        """Retrieve Post content"""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def CreateComment(self, request, context):
-        """Create a Comment
-        """
+        """Create a Comment"""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def VoteComment(self, request, context):
-        """Upvote or Downvote a Comment
-        """
+        """Upvote or Downvote a Comment"""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def GetTopComments(self, request, context):
-        """Retrieve a list of N most upvoted comments under a post
-        """
+        """Retrieve a list of N most upvoted comments under a post"""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def ExpandComment(self, request, context):
-        """Expand a comment branch
-        """
+        """Expand a comment branch"""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def MonitorUpdates(self, request, context):
-        """Monitor updates (Extra Credit)
-        """
+        """Monitor updates (Extra Credit)"""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
 
 def add_RedditServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'CreatePost': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreatePost,
-                    request_deserializer=reddit__pb2.CreatePostRequest.FromString,
-                    response_serializer=reddit__pb2.PostResponse.SerializeToString,
-            ),
-            'VotePost': grpc.unary_unary_rpc_method_handler(
-                    servicer.VotePost,
-                    request_deserializer=reddit__pb2.VotePostRequest.FromString,
-                    response_serializer=reddit__pb2.VoteResponse.SerializeToString,
-            ),
-            'GetPost': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetPost,
-                    request_deserializer=reddit__pb2.GetPostRequest.FromString,
-                    response_serializer=reddit__pb2.PostResponse.SerializeToString,
-            ),
-            'CreateComment': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateComment,
-                    request_deserializer=reddit__pb2.CreateCommentRequest.FromString,
-                    response_serializer=reddit__pb2.CommentResponse.SerializeToString,
-            ),
-            'VoteComment': grpc.unary_unary_rpc_method_handler(
-                    servicer.VoteComment,
-                    request_deserializer=reddit__pb2.VoteCommentRequest.FromString,
-                    response_serializer=reddit__pb2.VoteResponse.SerializeToString,
-            ),
-            'GetTopComments': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetTopComments,
-                    request_deserializer=reddit__pb2.GetTopCommentsRequest.FromString,
-                    response_serializer=reddit__pb2.TopCommentsResponse.SerializeToString,
-            ),
-            'ExpandComment': grpc.unary_unary_rpc_method_handler(
-                    servicer.ExpandComment,
-                    request_deserializer=reddit__pb2.ExpandCommentRequest.FromString,
-                    response_serializer=reddit__pb2.ExpandedCommentsResponse.SerializeToString,
-            ),
-            'MonitorUpdates': grpc.unary_stream_rpc_method_handler(
-                    servicer.MonitorUpdates,
-                    request_deserializer=reddit__pb2.MonitorUpdatesRequest.FromString,
-                    response_serializer=reddit__pb2.UpdateResponse.SerializeToString,
-            ),
+        "CreatePost": grpc.unary_unary_rpc_method_handler(
+            servicer.CreatePost,
+            request_deserializer=reddit__pb2.CreatePostRequest.FromString,
+            response_serializer=reddit__pb2.PostResponse.SerializeToString,
+        ),
+        "VotePost": grpc.unary_unary_rpc_method_handler(
+            servicer.VotePost,
+            request_deserializer=reddit__pb2.VotePostRequest.FromString,
+            response_serializer=reddit__pb2.VoteResponse.SerializeToString,
+        ),
+        "GetPost": grpc.unary_unary_rpc_method_handler(
+            servicer.GetPost,
+            request_deserializer=reddit__pb2.GetPostRequest.FromString,
+            response_serializer=reddit__pb2.PostResponse.SerializeToString,
+        ),
+        "CreateComment": grpc.unary_unary_rpc_method_handler(
+            servicer.CreateComment,
+            request_deserializer=reddit__pb2.CreateCommentRequest.FromString,
+            response_serializer=reddit__pb2.CommentResponse.SerializeToString,
+        ),
+        "VoteComment": grpc.unary_unary_rpc_method_handler(
+            servicer.VoteComment,
+            request_deserializer=reddit__pb2.VoteCommentRequest.FromString,
+            response_serializer=reddit__pb2.VoteResponse.SerializeToString,
+        ),
+        "GetTopComments": grpc.unary_unary_rpc_method_handler(
+            servicer.GetTopComments,
+            request_deserializer=reddit__pb2.GetTopCommentsRequest.FromString,
+            response_serializer=reddit__pb2.TopCommentsResponse.SerializeToString,
+        ),
+        "ExpandComment": grpc.unary_unary_rpc_method_handler(
+            servicer.ExpandComment,
+            request_deserializer=reddit__pb2.ExpandCommentRequest.FromString,
+            response_serializer=reddit__pb2.ExpandedCommentsResponse.SerializeToString,
+        ),
+        "MonitorUpdates": grpc.unary_stream_rpc_method_handler(
+            servicer.MonitorUpdates,
+            request_deserializer=reddit__pb2.MonitorUpdatesRequest.FromString,
+            response_serializer=reddit__pb2.UpdateResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'reddit.RedditService', rpc_method_handlers)
+        "reddit.RedditService", rpc_method_handlers
+    )
     server.add_generic_rpc_handlers((generic_handler,))
 
 
- # This class is part of an EXPERIMENTAL API.
+# This class is part of an EXPERIMENTAL API.
 class RedditService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def CreatePost(request,
+    def CreatePost(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/reddit.RedditService/CreatePost',
+            "/reddit.RedditService/CreatePost",
             reddit__pb2.CreatePostRequest.SerializeToString,
             reddit__pb2.PostResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def VotePost(request,
+    def VotePost(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/reddit.RedditService/VotePost',
+            "/reddit.RedditService/VotePost",
             reddit__pb2.VotePostRequest.SerializeToString,
             reddit__pb2.VoteResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def GetPost(request,
+    def GetPost(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/reddit.RedditService/GetPost',
+            "/reddit.RedditService/GetPost",
             reddit__pb2.GetPostRequest.SerializeToString,
             reddit__pb2.PostResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def CreateComment(request,
+    def CreateComment(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/reddit.RedditService/CreateComment',
+            "/reddit.RedditService/CreateComment",
             reddit__pb2.CreateCommentRequest.SerializeToString,
             reddit__pb2.CommentResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def VoteComment(request,
+    def VoteComment(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/reddit.RedditService/VoteComment',
+            "/reddit.RedditService/VoteComment",
             reddit__pb2.VoteCommentRequest.SerializeToString,
             reddit__pb2.VoteResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def GetTopComments(request,
+    def GetTopComments(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/reddit.RedditService/GetTopComments',
+            "/reddit.RedditService/GetTopComments",
             reddit__pb2.GetTopCommentsRequest.SerializeToString,
             reddit__pb2.TopCommentsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def ExpandComment(request,
+    def ExpandComment(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/reddit.RedditService/ExpandComment',
+            "/reddit.RedditService/ExpandComment",
             reddit__pb2.ExpandCommentRequest.SerializeToString,
             reddit__pb2.ExpandedCommentsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def MonitorUpdates(request,
+    def MonitorUpdates(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_stream(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/reddit.RedditService/MonitorUpdates',
+            "/reddit.RedditService/MonitorUpdates",
             reddit__pb2.MonitorUpdatesRequest.SerializeToString,
             reddit__pb2.UpdateResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )

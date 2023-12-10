@@ -3,8 +3,8 @@ import grpc
 from concurrent import futures
 from datetime import datetime
 from collections import defaultdict
-import reddit_pb2
-import reddit_pb2_grpc
+import random
+import reddit_pb2, reddit_pb2_grpc
 
 
 # Service implementation
@@ -19,6 +19,7 @@ class RedditServiceServicer(reddit_pb2_grpc.RedditServiceServicer):
         # Load dummy data
         self.users["user0"] = reddit_pb2.User(user_id="user0")
         self.sub_reddit["Testing"] = ["tech", "gRPC", "google"]
+
         self.posts["post0"] = reddit_pb2.Post(
             title="Example Title",
             text="Example Text",
@@ -34,17 +35,53 @@ class RedditServiceServicer(reddit_pb2_grpc.RedditServiceServicer):
             tags=[],
             reply_count=0,
         )
-        self.comments["comment0"] = reddit_pb2.Comment(
-            author_id="user0",
-            text="Some text to comment",
-            score=0,
-            status=reddit_pb2.CommentStatus.COMMENT_NORMAL,
-            publication_date=datetime.today().strftime("%Y-%m-%d"),
-            parent_id="post0",
-            comment_id=f"comment{len(self.comments)}",
-            reply_count=0,
-        )
-        self.parent_comments["post0"].append(self.comments["comment0"])
+
+        # Create 10 top level comments
+        for _ in range(10):
+            top_level_comment_id = f"comment{len(self.comments)}"
+            reply_count = random.randint(3, 12)
+            self.comments[top_level_comment_id] = reddit_pb2.Comment(
+                author_id="user0",
+                text=f"{top_level_comment_id}, THis is the top of the comment tree",
+                score=random.randint(0, 10),
+                status=reddit_pb2.CommentStatus.COMMENT_NORMAL,
+                publication_date=datetime.today().strftime("%Y-%m-%d"),
+                parent_id="post0",
+                comment_id=top_level_comment_id,
+                reply_count=reply_count,
+            )
+            self.parent_comments["post0"].append(self.comments[top_level_comment_id])
+            for _ in range(reply_count):
+                first_level_comment_id = f"comment{len(self.comments)}"
+                self.comments[first_level_comment_id] = reddit_pb2.Comment(
+                    author_id="user0",
+                    text=f"{first_level_comment_id}, THis is the first level of the comment tree",
+                    score=random.randint(0, 10),
+                    status=reddit_pb2.CommentStatus.COMMENT_NORMAL,
+                    publication_date=datetime.today().strftime("%Y-%m-%d"),
+                    parent_id=top_level_comment_id,
+                    comment_id=first_level_comment_id,
+                    reply_count=reply_count,
+                )
+                self.parent_comments[top_level_comment_id].append(
+                    self.comments[first_level_comment_id]
+                )
+                for _ in range(reply_count):
+                    second_level_commnt_id = f"comment{len(self.comments)}"
+
+                    self.comments[second_level_commnt_id] = reddit_pb2.Comment(
+                        author_id="user0",
+                        text=f"{second_level_commnt_id}, THis is the second level of the comment tree",
+                        score=random.randint(0, 10),
+                        status=reddit_pb2.CommentStatus.COMMENT_NORMAL,
+                        publication_date=datetime.today().strftime("%Y-%m-%d"),
+                        parent_id=first_level_comment_id,
+                        comment_id=second_level_commnt_id,
+                        reply_count=reply_count,
+                    )
+                    self.parent_comments[first_level_comment_id].append(
+                        self.comments[second_level_commnt_id]
+                    )
 
     def CreatePost(self, request, context):
         # Retrieve input
@@ -207,8 +244,51 @@ class RedditServiceServicer(reddit_pb2_grpc.RedditServiceServicer):
         )
 
     def ExpandComment(self, request, context):
-        # TODO: Implement logic to expand a comment branch
-        pass
+        comment_id = request.comment_id
+        number_of_comments = request.number_of_comments
+
+        comment = self.comments.get(comment_id, None)
+
+        if not comment:
+            context.set_code(grpc.StatusCode.NOT_FOUND)
+            context.set_details("Comment requested not found")
+            return reddit_pb2.ExpandCommentRequest(parent_comments=None)
+        elif number_of_comments < 1:
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+            context.set_details("Number of Comment expanded must be greater than 0")
+            return reddit_pb2.ExpandCommentRequest(parent_comments=None)
+
+        first_level_comments = self.parent_comments.get(comment_id, None)
+        if not first_level_comments:
+            context.set_code(grpc.StatusCode.NOT_FOUND)
+            context.set_details("No Comments under comment requested")
+            return reddit_pb2.ExpandCommentRequest(parent_comments=None)
+
+        first_level_comments = sorted(
+            first_level_comments, key=lambda x: x.score, reverse=True
+        )[:number_of_comments]
+
+        expanded_comment_response = []
+        for flc in first_level_comments:
+            flc_id = flc.comment_id
+            second_level_comments = self.parent_comments.get(flc_id, None)
+            new_comment_with_replies = (
+                reddit_pb2.CommentWithReplies(
+                    comment=flc,
+                    replies=sorted(
+                        second_level_comments,
+                        key=lambda x: x.score,
+                        reverse=True,
+                    )[:number_of_comments],
+                )
+                if second_level_comments
+                else reddit_pb2.CommentWithReplies(comment=flc, replies=[])
+            )
+            expanded_comment_response.append(new_comment_with_replies)
+
+        return reddit_pb2.ExpandedCommentsResponse(
+            parent_comments=expanded_comment_response
+        )
 
     # Extra Credit: Implement MonitorUpdates if required
     def MonitorUpdates(self, request, context):
