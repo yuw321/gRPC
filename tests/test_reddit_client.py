@@ -1,11 +1,11 @@
+import os
 import sys
-
-sys.path.append(
-    "/Users/testadmin/Desktop/Desktop/CMU/Fall 2023/17-625 API Design/Assignments/A3 gRPC/gRPC/server"
-)
-from client.reddit_client import get_most_upvoted_reply, RedditClient
 import unittest
 from unittest.mock import Mock
+
+directory_path = os.path.join(os.getcwd(), "server")
+sys.path.append(directory_path)
+from client.reddit_client import get_most_upvoted_reply
 
 
 class MockPostResponse:
@@ -101,13 +101,13 @@ class TestRedditClient(unittest.TestCase):
         mock_client = Mock()
         mock_client.get_post.return_value = (
             MockPostResponse()
-        )  # You need to define MockPost
+        ) 
         mock_client.get_top_comments.return_value = (
             MockTopCommentsResponse()
-        )  # You need to define MockTopComments
+        )  
         mock_client.expand_comment.return_value = (
             MockExpandCommentResponse()
-        )  # You need to define MockExpandedComments
+        )  
 
         # Call the function
         result = get_most_upvoted_reply(mock_client, "post0")
@@ -115,7 +115,7 @@ class TestRedditClient(unittest.TestCase):
         # Assertions
         self.assertIsNotNone(
             result
-        )  # or other relevant assertions based on your mock data
+        ) 
 
 
 if __name__ == "__main__":

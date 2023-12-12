@@ -1,8 +1,11 @@
+import sys
+import os
 import grpc
-from server import reddit_pb2, reddit_pb2_grpc
 import argparse
+directory_path = os.path.join(os.getcwd(), "gRPC/server")
+sys.path.append(directory_path)
 
-
+from server import reddit_pb2, reddit_pb2_grpc
 class RedditClient:
     def __init__(self, host, port):
         # Establish a connection to the server

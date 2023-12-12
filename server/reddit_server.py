@@ -290,10 +290,6 @@ class RedditServiceServicer(reddit_pb2_grpc.RedditServiceServicer):
             parent_comments=expanded_comment_response
         )
 
-    # Extra Credit: Implement MonitorUpdates if required
-    def MonitorUpdates(self, request, context):
-        # TODO: Implement logic for monitoring updates
-        pass
 
 
 # Function to start the gRPC server
